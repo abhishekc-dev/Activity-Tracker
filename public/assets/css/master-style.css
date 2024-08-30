@@ -1,0 +1,148 @@
+nav {
+    background-color: #c586c5;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav ul li a:hover {
+    text-decoration: none;
+}
+
+.nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+}
+
+.nav-links a.active {
+    color: #007BFF;
+}
+
+.social-icons {
+    display: flex;
+    align-items: center;
+}
+
+.social-icon {
+    margin-left: 15px;
+}
+
+.social-icon img {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+}
+
+.content {
+    padding: 20px;
+}
+
+.container-wrapper {
+    min-height: 300px;
+    width: 100%;
+    background-color: rgb(142, 115, 161);
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+footer {
+    background-color: #021e43;
+    color: #fff;
+    padding: 50px 0;
+}
+
+.footer-content {
+    max-width: 1200px;
+    display: flex;
+    padding: 0px 50px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-content p {
+    margin: 0;
+}
+
+.footer-content ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-content ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.footer-content ul li:last-child {
+    margin-right: 0;
+}
+
+.footer-content ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.text-custom {
+    color: #551347;
+}
+
+.bg-custom {
+    background-color: #551347;
+}
+
+.background {
+    background-color: #7f667a;
+}
+
+.footer-link {
+    color: #551347;
+    text-decoration: none;
+}
+
+.active {
+    color: #007bff;
+}
+
+
+
+
+/* Footer Style End */
