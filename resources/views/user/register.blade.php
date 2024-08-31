@@ -59,7 +59,7 @@
                     </select>
                 </div>
                 <div class="d-grid">
-                    <button type="submit" class="bg-custom text-white rounded px-2 py-1 w-100">Register</button>
+                    <button type="submit" class="bg-custom text-white rounded px-2 py-2 w-100">Register</button>
                 </div>
             </form>
         </div>

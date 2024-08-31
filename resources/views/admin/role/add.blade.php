@@ -12,16 +12,15 @@
     }
 
     .add-role-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         margin-bottom: 20px;
+        text-align: left;
     }
 
     .add-role-header h2 {
         margin: 0;
         font-size: 24px;
         color: #333;
+        text-align: center;
     }
 
     .add-role-header a {
@@ -61,8 +60,9 @@
 @section('admin-content')
 <div class="add-role-container">
     <div class="add-role-header">
-        <h2>Add Role</h2>
         <a href="{{ url('admin/manage-role') }}">Back</a>
+        <h2>Add Role</h2>
+
     </div>
     <form method="POST" action="{{ url('admin/manage-role/add') }}">
         @csrf

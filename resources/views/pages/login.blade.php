@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="d-grid">
-                    <button type="submit" class="rounded text-white bg-custom btn-block px-2 py-1">Login</button>
+                    <button type="submit" class="rounded text-white bg-custom btn-block px-2 py-2">Login</button>
                 </div>
             </form>
         </div>

@@ -64,19 +64,14 @@
         background-color: #dc3545;
     }
 
-    button {
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
+    .back-button {
         border-radius: 5px;
-        cursor: pointer;
-        font-size: 14px;
-        transition: background-color 0.3s ease;
+        background-color: transparent;
+        font-size: 18px;
     }
 
-    button:hover {
-        background-color: #0056b3;
+    .back-button:hover {
+        text-decoration: none;
     }
 
     .loader {
@@ -114,14 +109,12 @@
 @endsection
 
 @section('admin-content')
+<a href="{{url('admin/manage-team')}}" class="back-button">
+    Back
+</a>
 <div class="form-header">
     <h3 class="text-center fs-1">
         Edit Member of Team
-        <a href="{{url('admin/manage-team')}}">
-            <button class="bg-transparent border border-custom">
-                Back
-            </button>
-        </a>
     </h3>
 </div>
 <form action="{{url('admin/manage-team/update/' . $selectedProject->id)}}" method="POST">

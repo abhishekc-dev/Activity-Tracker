@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="d-grid">
-                    <button type="submit" class="bg-custom px-2 py-1 rounded  text-white btn-block">
+                    <button type="submit" class="bg-custom px-2 py-2 rounded  text-white btn-block">
                         Send Message
                     </button>
                 </div>

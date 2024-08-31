@@ -15,7 +15,7 @@
     </div>
 
     <div class="mb-4">
-        <a href="{{ url('dashboard/user/manage-task/add') }}" class="rounded px-2 py-2 bg-custom text-white">
+        <a href="{{ url('dashboard/user/manage-task/add') }}" class="rounded px-2 py-2 bg-custom text-white add-task">
             Add Task
         </a>
     </div>

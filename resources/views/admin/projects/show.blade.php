@@ -232,6 +232,22 @@
     .badge.trello {
         background-color: #0079bf;
     }
+
+    .add-project {
+        text-align: right;
+        margin-bottom: 30px;
+    }
+
+    .add-project a {
+        background-color: #021e43;
+        padding: 10px;
+        border-radius: 5px;
+        color: white;
+    }
+
+    .add-project a:hover {
+        text-decoration: none;
+    }
 </style>
 @endsection
 
@@ -266,9 +282,11 @@
         </select>
     </div>
 
-    <a href="{{url('admin/manage-project/add')}}">
-        <button class="bg-custom rounded text-white px-2 py-2 mb-4">Add Project</button>
-    </a>
+    <div class="add-project">
+        <a href="{{url('admin/manage-project/add')}}">
+            Add Project
+        </a>
+    </div>
 
     <div class="grid" id="projects-grid">
         @foreach ($projects as $project)
@@ -295,8 +313,16 @@
                 <div class="card-footer-left-buttons">
                     <a href="{{ url('admin/manage-project/edit/' . $project->id) }}" class="edit" title="Edit"><i
                             class="fas fa-edit"></i></a>
-                    <a href="{{ url('admin/manage-project/delete/' . $project->id) }}" class="delete" title="Delete"><i
-                            class="fas fa-trash"></i></a>
+                    <form action="{{ url('admin/manage-project/' . $project->id) }}" method="POST"
+                        onsubmit="return confirm('Are you sure to delete this project?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="delete" title="Delete"
+                            style="background:none; border:none; padding:0; cursor:pointer;">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+
                 </div>
             </div>
         @endforeach

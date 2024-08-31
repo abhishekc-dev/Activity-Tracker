@@ -2,68 +2,53 @@
 
 @section('internal-style')
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
 
-.container {
-    width: 50%;
-    margin: auto;
-    overflow: hidden;
-    padding: 20px;
-    background: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    margin-top: 30px;
-}
+    .container {
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
+        padding: 20px;
+        background: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        margin-top: 30px;
+    }
 
-h2 {
-    text-align: center;
-    color: #333;
-}
+    h2 {
+        text-align: center;
+        color: #333;
+    }
 
-label {
-    display: inline;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
-}
+    label {
+        display: inline;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+    }
 
-input[type="text"],
-input[type="date"],
-input[type="email"],
-input[type="file"],
-input[type="number"],
-textarea,
-select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
+    input[type="text"],
+    input[type="date"],
+    input[type="email"],
+    input[type="file"],
+    input[type="number"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
 
-textarea {
-    height: 100px;
-}
-
-input[type="submit"] {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #5cb85c;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #4cae4c;
-}
+    textarea {
+        height: 100px;
+    }
 </style>
 @endsection
 
@@ -74,10 +59,10 @@ input[type="submit"]:hover {
     <form action="{{url('admin/manage-project/add')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <label>Project Name:</label>
-        <input type="text" name="projectName">
+        <input type="text" name="projectName" class="form-control">
 
         <label>Project Description:</label>
-        <textarea name="projectDescription"></textarea>
+        <textarea name="projectDescription" class="form-control"></textarea>
 
         <label>Project Type:</label>
         <select name="projectType">
@@ -106,82 +91,82 @@ input[type="submit"]:hover {
         <label>Total Sprint:</label>
         <input type="number" name="totalSprint" id="totalSprint" readonly />
         <script>
-        let totalSprint = document.querySelector('#totalSprint');
-        let duration = document.querySelector('#duration');
-        duration.addEventListener('change', function() {
-            let durationObject = {
-                "<=1 month": 2,
-                "<=2 months": 4,
-                "<=3 months": 6,
-                "<=6 months": 12,
-                "<=12 months": 24,
-                "Long Term": 72,
-                "Short Term": 1,
-            }
-            let durationValue = this.value;
-            let sprint = durationObject[durationValue];
-            totalSprint.value = sprint;
-        });
+            let totalSprint = document.querySelector('#totalSprint');
+            let duration = document.querySelector('#duration');
+            duration.addEventListener('change', function () {
+                let durationObject = {
+                    "<=1 month": 2,
+                    "<=2 months": 4,
+                    "<=3 months": 6,
+                    "<=6 months": 12,
+                    "<=12 months": 24,
+                    "Long Term": 72,
+                    "Short Term": 1,
+                }
+                let durationValue = this.value;
+                let sprint = durationObject[durationValue];
+                totalSprint.value = sprint;
+            });
         </script>
 
         <label>Start Time:</label>
-        <input type="date" name="startTime">
+        <input type="date" name="startTime" class="form-control">
 
         <label>Team Size:</label>
-        <input type="number" name="teamSize" min="1" step="1">
+        <input type="number" name="teamSize" min="1" step="1" class="form-control">
         <!-- SkillSet Handling Code -->
         <label for="skillSet">Skill Set:</label>
         <br />
         <div id="selected-checkboxes" style="height:100px;overflow:scroll;overflow-X:hidden;"></div>
-        <input type="text" id="skillInput" placeholder="Type Skills..." />
+        <input type="text" id="skillInput" placeholder="Type Skills..." class="form-control" />
         <div class="checkbox-group">
             @if (count($skills) > 0)
-            <div style="height:100px;overflow:scroll;overflow-X:hidden" id="skillsContainer">
-                @foreach ($skills as $skill)
-                <label style="display:block;">
-                    <input type="checkbox" class="skillCheckbox" name="skillSet[]"
-                        value="{{$skill->name}}">{{$skill->name}}
-                </label>
-                @endforeach
-            </div>
+                <div style="height:100px;overflow:scroll;overflow-X:hidden" id="skillsContainer">
+                    @foreach ($skills as $skill)
+                        <label style="display:block;">
+                            <input type="checkbox" class="skillCheckbox" name="skillSet[]"
+                                value="{{$skill->name}}">{{$skill->name}}
+                        </label>
+                    @endforeach
+                </div>
             @endif
         </div>
 
         <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var skillInput = document.getElementById('skillInput');
-            var selectedCheckboxes = document.getElementById('selected-checkboxes');
+            document.addEventListener('DOMContentLoaded', function () {
+                var skillInput = document.getElementById('skillInput');
+                var selectedCheckboxes = document.getElementById('selected-checkboxes');
 
-            skillInput.addEventListener('input', function() {
-                var searchText = this.value.toLowerCase();
-                var skillCheckboxes = document.querySelectorAll('.skillCheckbox');
-                skillCheckboxes.forEach(function(checkbox) {
-                    var skillName = checkbox.value.toLowerCase();
-                    var label = checkbox.parentElement;
-                    if (skillName.includes(searchText)) {
-                        label.style.display = 'block';
-                    } else {
-                        label.style.display = 'none';
-                    }
-                });
-            });
-
-            var checkboxes = document.querySelectorAll('.skillCheckbox');
-            checkboxes.forEach(function(checkbox) {
-                checkbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        var clonedLabel = this.parentElement.cloneNode(true);
-                        selectedCheckboxes.appendChild(clonedLabel);
-                    } else {
-                        var labelToRemove = selectedCheckboxes.querySelector('label[value="' +
-                            this.value + '"]');
-                        if (labelToRemove) {
-                            selectedCheckboxes.removeChild(labelToRemove);
+                skillInput.addEventListener('input', function () {
+                    var searchText = this.value.toLowerCase();
+                    var skillCheckboxes = document.querySelectorAll('.skillCheckbox');
+                    skillCheckboxes.forEach(function (checkbox) {
+                        var skillName = checkbox.value.toLowerCase();
+                        var label = checkbox.parentElement;
+                        if (skillName.includes(searchText)) {
+                            label.style.display = 'block';
+                        } else {
+                            label.style.display = 'none';
                         }
-                    }
+                    });
+                });
+
+                var checkboxes = document.querySelectorAll('.skillCheckbox');
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.addEventListener('change', function () {
+                        if (this.checked) {
+                            var clonedLabel = this.parentElement.cloneNode(true);
+                            selectedCheckboxes.appendChild(clonedLabel);
+                        } else {
+                            var labelToRemove = selectedCheckboxes.querySelector('label[value="' +
+                                this.value + '"]');
+                            if (labelToRemove) {
+                                selectedCheckboxes.removeChild(labelToRemove);
+                            }
+                        }
+                    });
                 });
             });
-        });
         </script>
 
         <!-- End of the Skillset -->
@@ -191,11 +176,11 @@ input[type="submit"]:hover {
         <select name="manager">
             <option value="">Select</option>
             @if (count($managers) > 0)
-            @foreach ($managers as $user)
-            <option value="{{$user->id}}">
-                {{$user->name}} ({{$user->email}})
-            </option>
-            @endforeach
+                @foreach ($managers as $user)
+                    <option value="{{$user->id}}">
+                        {{$user->name}} ({{$user->email}})
+                    </option>
+                @endforeach
             @endif
         </select>
 
@@ -226,16 +211,16 @@ input[type="submit"]:hover {
         </select>
 
         <label>Reference:</label>
-        <input type="text" name="reference">
+        <input type="text" name="reference" class="form-control">
 
         <label>Attachment:</label>
-        <input type="file" name="attachment">
+        <input type="file" name="attachment" class="form-control">
 
         <label>Git Repository:</label>
-        <input type="text" name="gitRepo">
+        <input type="text" name="gitRepo" class="form-control">
 
         <label>Client Name:</label>
-        <input type="text" name="clientName">
+        <input type="text" name="clientName" class="form-control">
 
         <label>Level:</label>
         <select name="level">
@@ -255,7 +240,7 @@ input[type="submit"]:hover {
         </select>
 
         <label>Ticket ID:</label>
-        <input type="text" name="ticketId">
+        <input type="text" name="ticketId" class="form-control">
 
         <label>SDLC Model:</label>
         <select name="sdlcModel">
@@ -285,12 +270,12 @@ input[type="submit"]:hover {
         </select>
 
         <label>Client Contact Number:</label>
-        <input type="text" name="clientContactNumber">
+        <input type="text" name="clientContactNumber" class="form-control">
 
         <label>Client Email Address:</label>
-        <input type="email" name="clientEmailAddress">
+        <input type="email" name="clientEmailAddress" class="form-control">
 
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" class="rounded bg-custom text-white px-2 py-1 w-full">
     </form>
 </div>
 @endsection

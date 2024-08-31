@@ -4,7 +4,6 @@
 <style>
     body {
         font-family: Arial, sans-serif;
-        margin: 20px;
         background-color: #f8f9fa;
     }
 
@@ -142,9 +141,9 @@
     <h1>Welcome to Dashboard</h1>
     <p>
         @if (session()->has('userdata'))
-            <b>{{ ucfirst(session()->get('userdata')->name) }}</b>
+            {{ ucfirst(session()->get('userdata')->name) }}
             (
-            <b>{{ session()->get('userdata')->email }}</b>
+            {{ session()->get('userdata')->email }}
             )
         @endif
     </p>
@@ -155,7 +154,7 @@
 </div>
 
 <!-- Container Start -->
-<div class="container">
+<div class="container p-4 mx-auto">
     <div class="form-group">
         <label for="projectSelect">Select Project</label>
         <select id="projectSelect">
@@ -174,12 +173,13 @@
             $userID = session()->get('userdata')->id ?? "";
         @endphp
         <label for="nameInput">Name</label>
-        <input type="text" id="nameInput" placeholder="Enter Name" value="{!! $userName !!}" readonly>
+        <input type="text" id="nameInput" placeholder="Enter Name" value="{!! $userName !!}" readonly
+            class="form-control">
         <input type="hidden" id="user_id" value="{!! $userID !!}">
     </div>
     <div class="form-group">
         <label for="taskInput">Task Information</label>
-        <input type="text" id="taskInput" placeholder="Enter Task Information">
+        <input type="text" id="taskInput" placeholder="Enter Task Information" class="form-control">
     </div>
     <div class="form-group">
         <button id="startButton">Start Tracker</button>

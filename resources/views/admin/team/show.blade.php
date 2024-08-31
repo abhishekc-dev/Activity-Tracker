@@ -4,18 +4,14 @@
 <style>
     table {
         width: 100%;
-        border-collapse: collapse;
+        /* border-collapse: collapse; */
     }
 
     th,
     td {
         border: 1px solid #dddddd;
-        text-align: left;
+        text-align: center;
         padding: 8px;
-    }
-
-    th {
-        background-color: #f2f2f2;
     }
 
     tr:nth-child(even) {
@@ -55,9 +51,10 @@
     }
 
     .edit-btn,
+    .view-btn,
     .delete-btn {
         cursor: pointer;
-        font-size: 16px;
+        font-size: 20px;
     }
 
     .edit-btn {
@@ -67,6 +64,21 @@
     .delete-btn {
         color: red;
     }
+
+    .new-team {
+        text-align: right;
+    }
+
+    .new-team a {
+        background-color: #021e43;
+        padding: 10px 20px;
+        border-radius: 5px;
+        color: white;
+    }
+
+    .new-team a:hover {
+        text-decoration: none;
+    }
 </style>
 @endsection
 
@@ -74,12 +86,12 @@
 <h3 class="text-center">
     Manage Team for the Project
 </h3>
-<a href="{{url('admin/manage-team/add')}}">
-    <button class="rounded bg-custom px-2 py-2 text-white mb-4">
+<div class="new-team">
+    <a href="{{url('admin/manage-team/add')}}">
         Create New Team
-    </button>
-</a>
-<table>
+    </a>
+</div>
+<table class="table table-primary table-hover">
     <thead>
         <tr>
             <th>ID</th>
@@ -160,13 +172,13 @@
                             }
                         }
                     </script>
-                    <td style="cursor:pointer" onclick="toggleTeamInfo({{$project->id}})">
+                    <td style="cursor:pointer" onclick="toggleTeamInfo({{$project->id}})" class="view-btn">
                         <center>
                             @php
                                 $isVisible = ProjectHelper::getTeamName($project->id) ? true : false;
                             @endphp
                             @if ($isVisible)
-                                <img src="{{asset('assets/images/view-icons.png')}}" style="height:40px;width:40px;">
+                                <i class="fas fa-eye text-success"></i>
                             @else
                                 No Team Assigned
                             @endif
@@ -175,7 +187,7 @@
                     <td class="edit-btn">
                         @if ($isVisible)
                             <a href="{{url('admin/manage-team/edit/' . $project->id)}}">
-                                ✏️
+                                <i class="fa fa-pencil"></i>
                             </a>
                         @else
                             Permission Denied
@@ -184,16 +196,19 @@
                     </td>
                     <td class="delete-btn">
                         @if ($isVisible)
-                            <form action="{{url('admin/manage-team/delete/' . $project->id)}}" method="POST"
-                                onSubmit="return window.confirm('Do you want Delete?');">
+                            <form action="{{ url('admin/manage-team/delete/' . $project->id) }}" method="POST"
+                                onsubmit="return confirm('Do you want to delete this project?');">
                                 @csrf
                                 @method('DELETE')
-                                <input type="submit" value="🗑️" />
+                                <button type="submit" class="bg-transparent border-0 p-0" title="Delete">
+                                    <i class="fas fa-trash text-danger"></i>
+                                </button>
                             </form>
                         @else
                             Permission Denied
                         @endif
                     </td>
+
                 </tr>
                 @if (ProjectHelper::getTeamName($project->id))
                     <tr id="teamInfoTR{{$project->id}}" class="teamInfoHidden" style=" border:2px solid black;">`
@@ -235,10 +250,10 @@
                                                         <td>
                                                             @php
                                                                 $status = $team->is_active == 1 ? "<span
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        style='color:green;padding:5px;background:lightgreen;font-weight:bold;border-radius:5px;'>Active</span>"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    style='color:green;padding:5px;background:lightgreen;font-weight:bold;border-radius:5px;'>Active</span>"
                                                                     :
                                                                     "<span
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        style='color:red;padding:5px;background:pink;font-weight:bold;border-radius:5px;'>Disable</span>";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    style='color:red;padding:5px;background:pink;font-weight:bold;border-radius:5px;'>Disable</span>";
                                                             @endphp
                                                             {!!$status!!}
                                                         </td>

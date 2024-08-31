@@ -131,8 +131,8 @@ footer {
     background-color: #551347;
 }
 
-.background {
-    background-color: #7f667a;
+.add-task:hover {
+    text-decoration: none;
 }
 
 .footer-link {

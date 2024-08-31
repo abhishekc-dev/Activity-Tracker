@@ -19,14 +19,9 @@
     }
 
     .back-button {
-        color: purple;
-        border: none;
-        padding: 5px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        text-decoration: none;
-        margin-left: 10px;
-        border: 1px solid gray;
+        text-decoration: bold;
+        font-weight: bold;
+
     }
 
     .back-button:hover {

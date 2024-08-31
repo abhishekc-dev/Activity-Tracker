@@ -13,7 +13,7 @@
     <style>
 
     </style>
-    @yield('internal-style');
+    @yield('internal-style')
 </head>
 
 <body>
