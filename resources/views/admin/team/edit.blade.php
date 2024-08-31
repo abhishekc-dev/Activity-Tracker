@@ -1,125 +1,197 @@
-@extends('dashboard.admin');
-
+@extends('dashboard.admin')
 
 @section('internal-style')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <style>
-table {
-    width: 50%;
-    border-collapse: collapse;
-}
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
 
-th,
-td {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
+    th,
+    td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 12px;
+        font-size: 14px;
+    }
 
-th {
-    background-color: #f2f2f2;
-}
+    th {
+        background-color: #551347;
+        color: white
+    }
 
-.formcontrol {
-    width: 100%;
-}
+    td {
+        background-color: #ffffff;
+    }
 
-.badge {
-    display: inline-block;
-    padding: 5px;
-    font-size: 10px;
-    color: #fff;
-    font-weight: bold;
-    background-color: grey;
-    border-radius: 5px;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    margin: 5px;
-}
+    th,
+    td {
+        border-radius: 4px;
+    }
 
-.loader {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-    margin: 0px auto;
-}
+    .formcontrol {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 5px 10px;
+        font-size: 12px;
+        color: #fff;
+        font-weight: bold;
+        background-color: grey;
+        border-radius: 8px;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        margin: 5px;
+    }
+
+    .badge-success {
+        background-color: #28a745;
+    }
+
+    .badge-warning {
+        background-color: #ffc107;
+    }
+
+    .badge-error {
+        background-color: #dc3545;
+    }
+
+    button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .loader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        margin: 20px 0;
+    }
+
+    .loader i {
+        font-size: 24px;
+        color: #551347;
+    }
+
+    .form-header {
+        margin-bottom: 20px;
+    }
+
+    .form-header h3 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .form-header a {
+        text-decoration: none;
+    }
+
+    .form-header button {
+        background-color: #6c757d;
+    }
 </style>
 @endsection
 
 @section('admin-content')
-<h3>
-    Edit Member of Team |
-    <a href="{{url('admin/manage-team')}}">
-        <button>
-            back
-        </button>
-    </a>
-</h3>
-<form action="{{url('admin/manage-team/update/'.$selectedProject->id)}}" method="POST">
+<div class="form-header">
+    <h3 class="text-center fs-1">
+        Edit Member of Team
+        <a href="{{url('admin/manage-team')}}">
+            <button class="bg-transparent border border-custom">
+                Back
+            </button>
+        </a>
+    </h3>
+</div>
+<form action="{{url('admin/manage-team/update/' . $selectedProject->id)}}" method="POST">
     @csrf
     @method('PUT')
     <table>
-        <tr>
-            <th>Select Project</th>
-            <td>
-                <select class="formcontrol" onchange="handleAjaxProjectForm(this.value);" name="project_id"
-                    id="project_id">
-                    <option value="">Select Project </option>
-                    @if (count($projects) > 0)
-                    @foreach ($projects as $project)
-                    <option value="{{$project->id}}" @if ($selectedProject->id == $project->id) {{"selected"}} @endif>
-                        {{$project->project_name}}</option>
-                    @endforeach
-                    @endif
-                </select>
-            </td>
-        </tr>
-        <script>
-        function handleAjaxProjectForm(project_id) {
-            if (project_id.trim() == "") {
-                window.alert('Please Select Some Project');
+        <thead>
+            <tr>
+                <th>Select Project</th>
+                <td>
+                    <select class="formcontrol" onchange="handleAjaxProjectForm(this.value);" name="project_id"
+                        id="project_id">
+                        <option value="">Select Project</option>
+                        @if (count($projects) > 0)
+                            @foreach ($projects as $project)
+                                <option value="{{$project->id}}" @if ($selectedProject->id == $project->id) selected @endif>
+                                    {{$project->project_name}}
+                                </option>
+                            @endforeach
+                        @endif
+                    </select>
+                </td>
+            </tr>
+        </thead>
+        <tbody id="ajax_project_form">
+            <!-- Content will be loaded here via AJAX -->
+        </tbody>
+    </table>
+</form>
+
+<script>
+    function handleAjaxProjectForm(project_id) {
+        if (project_id.trim() === "") {
+            window.alert('Please Select Some Project');
+            return;
+        }
+
+        document.querySelector("#ajax_project_form").innerHTML = `<div class="loader">
+            <i class="fas fa-spinner fa-spin"></i>
+        </div>`;
+
+        fetch(`{{url('api/ajax/project_listing/edit/')}}/${project_id}`, {
+            headers: {
+                "Content-Type": "application/json;charset=utf-8"
             }
-
-            document.querySelector("#ajax_project_form").innerHTML = `<div class="loader">
-    <i class="fas fa-spinner fa-spin fa-3x"></i>
-  </div>`;
-
-            let api = fetch(`{{url('api/ajax/project_listing/edit/')}}/${project_id}`, {
-                headers: {
-                    "Content-Type": "application/json;charset=utf-8"
-                }
-            }).then((response) => {
+        })
+            .then(response => {
                 if (response.ok) {
                     return response.json();
                 } else {
                     throw new Error('Api Error');
                 }
-            }).then((result) => {
+            })
+            .then(result => {
                 if (result.code == 200 && result.status == true) {
                     setTimeout(() => {
                         document.querySelector("#ajax_project_form").innerHTML = result.data.html;
-                    }, 2000);
+                    }, 1000);
                 }
-            }).catch((error) => {
-                console.log('error', error);
             })
+            .catch(error => {
+                console.log('Error:', error);
+            });
+    }
 
-
-
+    document.addEventListener('DOMContentLoaded', function () {
+        const projectID = document.querySelector("#project_id").value;
+        if (projectID) {
+            handleAjaxProjectForm(projectID);
         }
-        //Once All the Elements are Rendered Then Only Execute
-        document.addEventListener('DOMContentLoaded', function() {
-            if (document.querySelector("#project_id")) {
-                let projectID = document.querySelector("#project_id").value;
-                handleAjaxProjectForm(projectID);
-            }
-        });
-        </script>
-        <tbody id="ajax_project_form">
-
-        </tbody>
-
-    </table>
-</form>
+    });
+</script>
 @endsection

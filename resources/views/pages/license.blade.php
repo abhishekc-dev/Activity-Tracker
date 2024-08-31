@@ -5,15 +5,15 @@
     <!-- Page Title -->
     <div class="text-center mb-4">
         <h1 class="display-4">License Information</h1>
-        <p class="lead text-muted">Understand the terms and conditions of using our activity tracker.</p>
+        <p class="lead ">Understand the terms and conditions of using our activity tracker.</p>
     </div>
 
     <!-- License Overview Section -->
     <div class="row mb-5">
         <div class="col-md-12">
             <h2 class="h3">License Overview</h2>
-            <p class="text-muted">
-                Our activity tracker is licensed under the [Name of License], which allows you to use, modify, and
+            <p class="">
+                Our activity tracker is licensed under the MIT, which allows you to use, modify, and
                 distribute the software under certain conditions. Please review the details below to ensure compliance
                 with the licensing terms.
             </p>

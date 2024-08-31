@@ -2,9 +2,9 @@
 
 @section('site-content')
 <div class="container mt-5" style="max-width: 600px;">
-    <h2 class="text-center mb-4">Contact Us</h2>
 
-    <div class="card shadow-sm">
+    <div class="card shadow-sm p-4">
+        <h2 class="text-center">Contact Us</h2>
         <div class="card-body">
             <form action="#">
                 @csrf

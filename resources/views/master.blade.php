@@ -32,6 +32,7 @@
     <!-- Footer Includes End -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.bundle.js')}}"></script>
+    @yield('internal-script')
 </body>
 
 </html>

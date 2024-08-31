@@ -2,9 +2,9 @@
 <!-- Main.blade.php -->
 
 @section('site-content')
-<div class="container mt-5">
+<div class="container mt-5 p-4">
     <div class="text-center mb-4">
-        <h1 class="display-4">Welcome Admin</h1>
+        <h1 class="display-4 mb-4">Welcome Admin</h1>
         @if (session()->has('userdata'))
             <p class="lead">
                 <b>{{ ucfirst(session()->get('userdata')->name) }}</b> (
@@ -15,7 +15,7 @@
         <hr />
     </div>
 
-    <div class="d-flex justify-content-center mb-4">
+    <div class="d-flex justify-content-center mb-2 p-4">
         @include('dashboard.layouts.nav')
     </div>
 

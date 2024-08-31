@@ -145,6 +145,6 @@
 </tr>
 <tr>
     <td colspan="2">
-        <input type="submit" name="submit" class="formcontrol" />
+        <input type="submit" name="submit" class="formcontrol bg-custom text-white w-full" />
     </td>
 </tr>
