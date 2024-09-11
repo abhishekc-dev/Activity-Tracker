@@ -31,7 +31,15 @@
     @include('layouts.footer')
     <!-- Footer Includes End -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="{{ asset('jquery/attrvalidate.jquery.js')}}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.bundle.js')}}"></script>
+    <script>
+        function toggleMenu(menuClass) {
+            const navLinks = document.querySelector(menuClass);
+            navLinks.classList.toggle('active');
+        }
+    </script>
+
     @yield('internal-script')
 </body>
 

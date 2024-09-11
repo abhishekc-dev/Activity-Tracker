@@ -185,7 +185,7 @@
                                                         <td>
                                                             <span class="end-time">{{ $task->endTime }}</span>
                                                         </td>
-                                                        <td>{{ $task->totalTime }} sec</td>
+                                                        <td>{{ $task->totalTime }}</td>
                                                         <td>
                                                             @php
                                                                 $url = url('uploads/' . $task->vedio_uniqueFileName);

@@ -56,13 +56,19 @@
 @section('admin-content')
 <div class="container">
     <h2>Project Information Form</h2>
-    <form action="{{url('admin/manage-project/add')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{url('admin/manage-project/add')}}" method="POST" enctype="multipart/form-data" id="myForm">
         @csrf
         <label>Project Name:</label>
         <input type="text" name="projectName" class="form-control">
+        @error('projectName')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
 
         <label>Project Description:</label>
         <textarea name="projectDescription" class="form-control"></textarea>
+        @error('projectDescription')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
 
         <label>Project Type:</label>
         <select name="projectType">
@@ -90,6 +96,7 @@
 
         <label>Total Sprint:</label>
         <input type="number" name="totalSprint" id="totalSprint" readonly />
+
         <script>
             let totalSprint = document.querySelector('#totalSprint');
             let duration = document.querySelector('#duration');
@@ -111,9 +118,16 @@
 
         <label>Start Time:</label>
         <input type="date" name="startTime" class="form-control">
+        @error('startTime')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
+
 
         <label>Team Size:</label>
         <input type="number" name="teamSize" min="1" step="1" class="form-control">
+        @error('teamSize')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
         <!-- SkillSet Handling Code -->
         <label for="skillSet">Skill Set:</label>
         <br />
@@ -212,15 +226,28 @@
 
         <label>Reference:</label>
         <input type="text" name="reference" class="form-control">
+        @error('reference')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
+
 
         <label>Attachment:</label>
         <input type="file" name="attachment" class="form-control">
+        @error('attachment')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
 
         <label>Git Repository:</label>
         <input type="text" name="gitRepo" class="form-control">
+        @error('gitRepo')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
 
         <label>Client Name:</label>
         <input type="text" name="clientName" class="form-control">
+        @error('clientName')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
 
         <label>Level:</label>
         <select name="level">
@@ -241,6 +268,9 @@
 
         <label>Ticket ID:</label>
         <input type="text" name="ticketId" class="form-control">
+        @error('ticketId')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
 
         <label>SDLC Model:</label>
         <select name="sdlcModel">
@@ -271,11 +301,18 @@
 
         <label>Client Contact Number:</label>
         <input type="text" name="clientContactNumber" class="form-control">
+        @error('clientContactNumber')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
 
         <label>Client Email Address:</label>
         <input type="email" name="clientEmailAddress" class="form-control">
+        @error('clientEmailAddress')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
 
         <input type="submit" value="Submit" class="rounded bg-custom text-white px-2 py-1 w-full">
     </form>
+
 </div>
 @endsection

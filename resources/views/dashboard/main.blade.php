@@ -28,7 +28,7 @@
             <div class="table-responsive">
                 <table class="table table-striped table-bordered">
                     <thead>
-                        <tr>
+                        <tr class="text-center">
                             <th>#</th>
                             <th>Task Name</th>
                             <th>Project Name</th>
@@ -44,19 +44,19 @@
                                                                 <tr>
                                                                     <td>{{ $task->id }}</td>
                                                                     <td>
-                                                                        <span class="badge bg-success">{{ $task->taskInfo }}</span>
+                                                                        <span class="badge">{{ $task->taskInfo }}</span>
                                                                     </td>
                                                                     <td>
                                                                         <a href="#">{{ ProjectHelper::getProjectName($task->project_id) }}</a>
                                                                     </td>
                                                                     <td>
-                                                                        <span class="badge bg-primary">{{ $task->startTime }}</span>
+                                                                        <span class="badge bg-info p-2">{{ $task->startTime }}</span>
                                                                     </td>
                                                                     <td>
-                                                                        <span class="badge bg-danger">{{ $task->endTime }}</span>
+                                                                        <span class="badge bg-warning p-2">{{ $task->endTime }}</span>
                                                                     </td>
-                                                                    <td>{{ $task->totalTime }} sec</td>
-                                                                    <td>
+                                                                    <td class="text-center">{{ $task->totalTime }} sec</td>
+                                                                    <td class="text-center">
                                                                         @php
                                                                             $url = url('uploads/' . $task->vedio_uniqueFileName);
                                                                         @endphp

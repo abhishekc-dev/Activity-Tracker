@@ -1,5 +1,8 @@
 <nav>
-    <div class="nav-wrapper px-4 py-2">
+    <div class="nav-wrapper">
+        <div class="menu-toggle" onclick="toggleMenu('.nav-links')">
+            <i class="fas fa-bars"></i>
+        </div>
         <ul class="nav-links">
             <li><a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">Home</a></li>
             @if(!session()->has('userdata'))
@@ -36,6 +39,5 @@
                 <i class="fas fa-phone-alt"></i>
             </a>
         </div>
-
     </div>
 </nav>

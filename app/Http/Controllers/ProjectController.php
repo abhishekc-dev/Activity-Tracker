@@ -37,6 +37,32 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
 
+        $Validator = $request->validate([
+            "projectName" => "required|string|max:255",
+            "projectDescription" => "nullable|string",
+            "projectType" => "required|in:Small,Medium,Large,Enterprise",
+            "duration" => "required|in:<=1 month,<=2 months,<=3 months,<=6 months,<=12 months,Long Term,Short Term",
+            "totalSprint" => "nullable|integer|min:1",
+            "startTime" => "required|date",
+            "teamSize" => "required|integer|min:1",
+            "manager" => "required|exists:users,id",
+            "priority" => "required|in:High,Medium,Low",
+            "contractType" => "required|in:Fixed,Hourly",
+            "status" => "required|in:Open,To Do,Pending,In Progress,Testing,Deployment,Suspended,Delivered,Closed",
+            "reference" => "required|string|max:255",
+            "attachment" => "required|file|mimes:jpg,jpeg,png,pdf,doc,docx|max:2048",
+            "gitRepo" => "required|url|max:255",
+            "clientName" => "required|string|max:255",
+            "level" => "required|in:Entry Level,Intermediate,Experienced",
+            "projectManagementTool" => "required|in:Open Project,Bug Tracker Mantis,JIRA,Dollibar,Hubstaff,Upwork Dashboard",
+            "ticketId" => "required|string|max:255",
+            "sdlcModel" => "required|in:Waterfall,Agile,Prototype,V Model,Iterative Model",
+            "projectLocation" => "required|in:Remote,Onsite",
+            "community" => "required|in:Slack,Skype,WhatsApp,Telegram,Trello,JIRA Connect,Teams,Google Meet",
+            "clientContactNumber" => "required|string|max:15",
+            "clientEmailAddress" => "required|email|max:255",
+        ]);
+
 
         DB::table('projects')->insert([
             'project_name' => $request->projectName,

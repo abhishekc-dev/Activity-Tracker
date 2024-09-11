@@ -68,7 +68,13 @@
         @csrf
         <div class="form-group">
             <label for="designation">Enter Designation:</label>
-            <input type="text" id="designation" name="designation" required class="form-control">
+            <input type="text" id="designation" name="designation" class="form-control">
+            @error('designation')
+
+                <div class="text-danger">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
         <input type="submit" name="submit" value="Add" class="bg-custom">
     </form>

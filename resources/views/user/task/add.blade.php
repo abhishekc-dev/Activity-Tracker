@@ -42,13 +42,16 @@
         text-decoration: underline;
     }
 
-    .form-group {
-        margin-bottom: 20px;
+    table {
+        width: 100%;
+    }
+
+    table td {
+        padding: 10px;
+        vertical-align: top;
     }
 
     .form-group label {
-        display: block;
-        margin-bottom: 8px;
         font-weight: bold;
         color: #333;
     }
@@ -72,7 +75,6 @@
 
     .form-group button {
         cursor: pointer;
-        background-color: #007bff;
         color: white;
         border: none;
         border-radius: 4px;
@@ -117,22 +119,6 @@
             opacity: 0;
         }
     }
-
-    @media (min-width: 600px) {
-        .form-group {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group button,
-        .form-group progress {
-            width: calc(50% - 10px);
-        }
-    }
 </style>
 @endsection
 
@@ -155,42 +141,62 @@
 
 <!-- Container Start -->
 <div class="container p-4 mx-auto">
-    <div class="form-group">
-        <label for="projectSelect">Select Project</label>
-        <select id="projectSelect">
-            @if (count($projects) > 0)
-                @foreach ($projects as $project)
-                    <option value="{{$project->project_id}}">
-                        {{ ProjectHelper::getProjectName($project->project_id) }}
-                    </option>
-                @endforeach
-            @endif
-        </select>
-    </div>
-    <div class="form-group">
-        @php
-            $userName = session()->get('userdata')->name ?? "";
-            $userID = session()->get('userdata')->id ?? "";
-        @endphp
-        <label for="nameInput">Name</label>
-        <input type="text" id="nameInput" placeholder="Enter Name" value="{!! $userName !!}" readonly
-            class="form-control">
-        <input type="hidden" id="user_id" value="{!! $userID !!}">
-    </div>
-    <div class="form-group">
-        <label for="taskInput">Task Information</label>
-        <input type="text" id="taskInput" placeholder="Enter Task Information" class="form-control">
-    </div>
-    <div class="form-group">
-        <button id="startButton">Start Tracker</button>
-    </div>
-    <div class="form-group">
-        <button id="stopButton" disabled>Stop Tracker</button>
-    </div>
-    <div class="form-group">
-        <label for="progressBar">Progress</label>
-        <progress id="progressBar" max="100" value="0"></progress>
-    </div>
+    <table>
+        <tr class="form-group">
+            <td><label for="projectSelect">Select Project</label></td>
+            <td>
+                <select id="projectSelect">
+                    @if (count($projects) > 0)
+                        @foreach ($projects as $project)
+                            <option value="{{$project->project_id}}">
+                                {{ ProjectHelper::getProjectName($project->project_id) }}
+                            </option>
+                        @endforeach
+                    @endif
+                </select>
+            </td>
+        </tr>
+        <tr class="form-group">
+            @php
+                $userName = session()->get('userdata')->name ?? "";
+                $userID = session()->get('userdata')->id ?? "";
+            @endphp
+            <td><label for="nameInput">Name</label></td>
+            <td>
+                <input type="text" id="nameInput" placeholder="Enter Name" value="{!! $userName !!}" readonly
+                    class="form-control">
+                <input type="hidden" id="user_id" value="{!! $userID !!}">
+            </td>
+        </tr>
+        <tr class="form-group">
+            <td><label for="taskInput">Task Information</label></td>
+            <td>
+                <input type="text" id="taskInput" placeholder="Enter Task Information" class="form-control">
+            </td>
+        </tr>
+        <tr class="form-group">
+            <td>
+                <label for="startButton"> Start </label>
+            </td>
+            <td>
+                <button id="startButton" class="bg-success">Start Tracker</button>
+            </td>
+        </tr>
+        <tr class="form-group">
+            <td>
+                <label for="stopButton"> Stop </label>
+            </td>
+            <td>
+                <button id="stopButton" disabled>Stop Tracker</button>
+            </td>
+        </tr>
+        <tr class="form-group">
+            <td><label for="progressBar">Progress</label></td>
+            <td>
+                <progress id="progressBar" max="100" value="0"></progress>
+            </td>
+        </tr>
+    </table>
 </div>
 
 <div id="recordingIndicator"></div>

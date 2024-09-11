@@ -1,20 +1,24 @@
 <!-- For Admin Navigation start -->
 <nav class="bg-custom rounded">
-        <ul>
-                <li><a href="{{url('/admin/manage-project/')}}"
-                                style="{{request()->segment(2) == 'manage-project' ? 'text-decoration:underline ' : ''}}">Manage
-                                Project</a></li>
-                <li><a href="{{url('/admin/manage-role/')}}"
-                                style="{{request()->segment(2) == 'manage-role' ? 'text-decoration:underline ' : ''}}">Manage
-                                Role</a></li>
-                <li><a href="{{url('/admin/manage-team/')}}"
-                                style="{{request()->segment(2) == 'manage-team' ? 'text-decoration:underline ' : ''}}">Manage
-                                Team</a>
-                </li>
-                <li><a href="{{url('/admin/manage-task/')}}"
-                                style="{{request()->segment(2) == 'manage-task' ? 'text-decoration:underline ' : ''}}">Manage
-                                Task</a></li>
-        </ul>
+        <div class="nav-wrapper">
+                <div class="menu-toggle" onclick="toggleMenu('.admin-nav-links')">
+                        <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links admin-nav-links">
+                        <li><a href="{{ url('/admin/manage-project/') }}"
+                                        class="{{ request()->segment(2) == 'manage-project' ? 'active' : '' }}">Manage
+                                        Project</a></li>
+                        <li><a href="{{ url('/admin/manage-role/') }}"
+                                        class="{{ request()->segment(2) == 'manage-role' ? 'active' : '' }}">Manage
+                                        Role</a></li>
+                        <li><a href="{{ url('/admin/manage-team/') }}"
+                                        class="{{ request()->segment(2) == 'manage-team' ? 'active' : '' }}">Manage
+                                        Team</a></li>
+                        <li><a href="{{ url('/admin/manage-task/') }}"
+                                        class="{{ request()->segment(2) == 'manage-task' ? 'active' : '' }}">Manage
+                                        Task</a></li>
+                </ul>
+        </div>
 </nav>
-`
+
 <!-- For Admin Navigation End-->
